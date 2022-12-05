@@ -7,12 +7,11 @@ import java.io.IOException;
 
 public abstract class Challenge {
 
-	public String file;
 	public BufferedReader reader;
 
 	public Challenge(String s) {
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new FileReader(s));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

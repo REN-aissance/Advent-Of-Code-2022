@@ -11,19 +11,15 @@ public class Day1 extends Challenge {
 		super("resources/1.txt");
 	}
 
-	public ArrayList<Integer> totals;
 	public PriorityQueue<Integer> pq;
 
 	@Override
 	public void setup() throws Exception {
-		totals = getTotals();
 		pq = buildPQ();
 	}
 	
 	@Override
 	public String challenge1() {
-		for (Integer i : totals)
-			pq.add(i);
 		return pq.poll().toString();
 	}
 
@@ -36,25 +32,18 @@ public class Day1 extends Challenge {
 		return out.toString();
 	}
 
-	private ArrayList<Integer> getTotals() throws Exception {
+	private PriorityQueue<Integer> buildPQ() throws Exception {
 		String l;
 		Integer elfCals = 0;
-		ArrayList<Integer> totals = new ArrayList<>();
+		pq = new PriorityQueue<>(Collections.reverseOrder());
 		while ((l = reader.readLine()) != null) {
 			if (l.isBlank()) {
-				totals.add(elfCals);
+				pq.add(elfCals);
 				elfCals = 0;
 			} else {
 				elfCals += Integer.parseInt(l);
 			}
 		}
-		return totals;
-	}
-
-	private PriorityQueue<Integer> buildPQ() {
-		pq = new PriorityQueue<>(totals.size(), Collections.reverseOrder());
-		for (Integer i : totals)
-			pq.add(i);
 		return pq;
 	}
 }
